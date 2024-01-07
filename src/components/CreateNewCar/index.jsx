@@ -18,7 +18,7 @@ const CreateNewCar = () => {
                 <h2 className="car-sub-title">Add New Car</h2>
             <div className="addcar-input-container">
                 <div className="addcar-input-form">
-                    <Form.Group as={Row} className="mb-3" controlId="formName">
+                    {/* <Form.Group as={Row} className="mb-3" controlId="formName">
                         <Form.Label column sm="2" className="custom-label">Nama/Tipe Mobil<span className="asterisk">*</span></Form.Label>
                         <Col sm="10">
                             <Form.Control type="text" placeholder="Input Nama/Tipe Mobil" />
@@ -46,7 +46,32 @@ const CreateNewCar = () => {
                             <option value="3">Three</option>
                         </Form.Select>
                         </Col>
-                    </Form.Group>
+                    </Form.Group> */}
+                    <div className="addcar-input-form-1">
+                        <p>Nama<span className="asterisk">*</span></p>
+                        <input type="text" />
+                    </div>
+                    <div className="addcar-input-form-1">
+                        <p>Harga<span className="asterisk">*</span></p>
+                        <input type="text" />
+                    </div>
+                    <div className="addcar-input-form-1">
+                        <p>Foto<span className="asterisk">*</span></p>
+                        <div>
+                            <input type="file" id="input-with-upload-image" />
+                            <p id="requirement-text-image">File size max. 2MB</p>
+                        </div>
+                    </div>
+                    <div className="addcar-input-form-1">
+                        <p>Kategori<span className="asterisk">*</span></p>
+                        <select name="" id="select-cars">
+                            <option value="">1 mobil</option>
+                            <option value="">2 mobil</option>
+                            <option value="">3 mobil</option>
+                            <option value="">4   mobil</option>
+
+                        </select>
+                    </div>
                     <div className="addcar-input-form-2">
                         <p>Created at</p>
                         <p>-</p>

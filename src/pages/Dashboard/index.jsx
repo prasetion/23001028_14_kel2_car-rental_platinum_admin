@@ -8,6 +8,7 @@ const Dashboard = () => {
           <div className="list-logo">
             <img src="" alt="" />
             <fiHome />
+            <h1>Dashboard</h1>
             <img src="" alt="" />
           </div>
         </div>
