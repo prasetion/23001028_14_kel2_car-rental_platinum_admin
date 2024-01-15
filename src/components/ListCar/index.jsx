@@ -15,7 +15,7 @@ const ListCar = () => {
 
             const config = {
                 headers: {
-                  Authorization: `Bearer ${token}`,
+                  access_token: `${token}`,
                 },
               };
 

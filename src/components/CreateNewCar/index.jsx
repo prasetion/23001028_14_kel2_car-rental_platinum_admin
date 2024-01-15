@@ -1,10 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css"
 import Form from 'react-bootstrap/Form';
 import chevronRight from "../../assets/chevron-right.svg"
 import { Col, Row, Button } from "react-bootstrap";
+import axios from "axios";
 
 const CreateNewCar = () => {
+
+    const [form, setForm] = useState ({
+        name: "",
+        category: "",
+        price: "",
+        image: "",
+    })
+
+    // const handleChange = () => {
+
+    // }
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault()
+    //     const token = localStorage.getItem("accessToken")
+    //     const config = {
+    //         headers: {
+    //             Authorization: `${token}`
+    //         }
+    //     }
+
+    //     try {
+            
+    //     }
+
+    // }
+
+    console.log(
+        form.name,
+        form.category,
+        form.price,
+        form.image,
+    )
+
     return (
         <div className="addcar-container">
             <div className="breadcrumb">
