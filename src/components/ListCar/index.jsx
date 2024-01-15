@@ -8,8 +8,16 @@ const ListCar = () => {
 
   const getCarList = async () => {
     try {
-      const res = await axios.get("https://api-car-rental.binaracademy.org/admin/v2/car?page=1&pageSize=10");
-      console.log(res);
+      const token = localStorage.getItem("accessToken");
+
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const res = await axios.get("https://api-car-rental.binaracademy.org/admin/v2/car?page=1&pageSize=10", config);
+      console.log(res.data);
     } catch (err) {
       console.log(err);
     }
@@ -21,5 +29,4 @@ const ListCar = () => {
     </div>
   );
 };
-
 export default ListCar;
