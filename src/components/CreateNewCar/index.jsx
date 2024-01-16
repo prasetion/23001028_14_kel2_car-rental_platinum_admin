@@ -1,10 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css"
 import Form from 'react-bootstrap/Form';
 import chevronRight from "../../assets/chevron-right.svg"
 import { Col, Row, Button } from "react-bootstrap";
+import axios from "axios";
 
 const CreateNewCar = () => {
+
+    const [form, setForm] = useState ({
+        name: "",
+        category: "",
+        price: "",
+        image: "",
+    })
+
+    const handleChange = (e) => {
+        const {name, value} = e.target
+        // console.log(name, value)
+        setForm({
+            ...form,
+            [name]: value,
+        })
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        form.price = Number(form.price)
+        try {
+            const token = localStorage.getItem("accessToken")
+
+            const config = {
+                headers: {
+                  access_token: `${token}`,
+                },
+              };
+
+              const res = await axios.post("https://api-car-rental.binaracademy.org/admin/car", form, config)
+              console.log(res.data)
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
+
+    console.log(
+        form.name,
+        form.category,
+        form.price,
+        form.image,
+    )
+
     return (
         <div className="addcar-container">
             <div className="breadcrumb">
@@ -49,26 +94,26 @@ const CreateNewCar = () => {
                     </Form.Group> */}
                     <div className="addcar-input-form-1">
                         <p>Nama<span className="asterisk">*</span></p>
-                        <input type="text" />
+                        <input onChange={handleChange} name="name" type="text" />
                     </div>
                     <div className="addcar-input-form-1">
                         <p>Harga<span className="asterisk">*</span></p>
-                        <input type="text" />
+                        <input onChange={handleChange} name="price" type="text" />
                     </div>
                     <div className="addcar-input-form-1">
                         <p>Foto<span className="asterisk">*</span></p>
                         <div>
-                            <input type="file" id="input-with-upload-image" />
+                            <input onChange={handleChange} name="image" type="file" id="input-with-upload-image" />
                             <p id="requirement-text-image">File size max. 2MB</p>
                         </div>
                     </div>
                     <div className="addcar-input-form-1">
                         <p>Kategori<span className="asterisk">*</span></p>
-                        <select name="" id="select-cars">
-                            <option value="">1 mobil</option>
-                            <option value="">2 mobil</option>
-                            <option value="">3 mobil</option>
-                            <option value="">4   mobil</option>
+                        <select onChange={handleChange} name="category" id="select-cars">
+                            <option value="">Kategori</option>
+                            <option value="small">2 - 4 people</option>
+                            <option value="medium">4 - 6 people</option>
+                            <option value="large">6 - 8 people</option>
 
                         </select>
                     </div>
@@ -84,7 +129,7 @@ const CreateNewCar = () => {
             </div>
             <div className="button-container">
                 <button className="button-cancel">Cancel</button>
-                <button className="button-save">Save</button>
+                <button className="button-save" onClick={handleSubmit}>Save</button>
             </div>
             </div>
         </div>
