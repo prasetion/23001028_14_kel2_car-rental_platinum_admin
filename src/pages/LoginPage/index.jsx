@@ -1,17 +1,29 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../../redux/features/login/loginSlice";
+import "./style.css";
 
 import BackgroundLogin from "../../assets/assets-login/background-login.png";
 import Logo from "../../assets/assets-login/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { error } = useSelector((state) => state.login);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSignIn = () => {
     const payload = {
       email: email,
       password: password,
     };
+
+    dispatch(login(payload)).then(() => {
+      navigate("/");
+    });
     console.log(payload);
   };
 
@@ -30,6 +42,11 @@ const LoginPage = () => {
         <div className="m-auto d-flex flex-column justify-content-start gap-3" style={{ width: "25%" }}>
           <img src={Logo} alt="" style={{ width: "100px", height: "34px" }} />
           <h1>Welcome, Admin BCR</h1>
+          {error && (
+            <div className="error-message">
+              <p>{error}</p>
+            </div>
+          )}
           <div style={{ width: "100%" }}>
             <p>Email</p>
             <input type="text" placeholder="Contoh: johndee@gmail.com" className="border rounded-1 p-2" style={{ width: "100%", color: "#A5A5A5" }} onChange={(e) => setEmail(e.target.value)} onKeyDown={handleKeyDown} />

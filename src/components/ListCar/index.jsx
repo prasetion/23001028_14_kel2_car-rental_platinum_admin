@@ -12,10 +12,9 @@ const ListCar = () => {
         getCarList()
     }, [])
 
-    const getCarList = async () => {
-        try {
-
-            const token = localStorage.getItem("accessToken")
+  const getCarList = async () => {
+    try {
+      const token = localStorage.getItem("accessToken");
 
             const config = {
                 headers: {
@@ -30,6 +29,7 @@ const ListCar = () => {
             console.log(err)    
         }
     }
+  };
 
     return(
         <div className="listcar-container">
@@ -66,5 +66,3 @@ const ListCar = () => {
         </div>
     )
 }
-
-export default ListCar
