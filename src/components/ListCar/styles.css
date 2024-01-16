@@ -1,0 +1,95 @@
+
+.listcar-container {
+    background: #F4F5F7;
+    padding: 25px;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+}
+
+.carlist-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+#carlist-card {
+    display: flex;
+    width: 351px;
+    padding: 24px;
+    flex-direction: column;
+    gap: 24px;
+    border-radius: 8px;
+    background: #FFF;
+
+    /* Shadow/Low */
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.15);
+}
+
+.carimage-card {
+    width: 303px;
+    height: 222px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+    background: #FFF;
+}
+
+.carimage-card img {
+    width: 270px;
+    height: 160px;
+    flex-shrink: 0;
+
+    background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+}
+
+.carlist-button{
+    display: flex;
+    justify-content: space-around;
+    gap: 16px;
+}
+
+.delete-button {
+    height: 48px;
+    padding: 8px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex: 1 0 0;
+    border-radius: 2px;
+    border: 2px solid var(--Allert-Danger, #FA2C5A);
+    background: var(--Neutral-10, #FFF);
+    width: auto;
+
+    color: var(--Allert-Danger, #FA2C5A);
+    font-family: Arial;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 142.857% */
+}
+
+.edit-button {
+    height: 48px;
+    padding: 8px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex: 1 0 0;
+    border: none;
+
+    border-radius: 2px;
+    background: var(--Primary-LimeGreen-04, #5CB85F);
+    
+    color: var(--Neutral-10, #FFF);
+    font-family: Arial;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 142.857% */
+}
