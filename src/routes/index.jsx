@@ -4,30 +4,56 @@ import Dashboard from "../pages/Dashboard";
 import CarList from "../pages/CarList";
 import LoginPage from "../pages/LoginPage";
 import EditCar from "../pages/EditCar";
-import LoginPage from "../pages/LoginPage";
 import ProtectedLogin from "../hoc/ProtectedLogin";
 import ProtectedRoute from "../hoc/ProtectedRoute";
+import HomePage from "../pages/HomePage";
 
 const routers = createBrowserRouter([
   {
     path: "/",
-    element: <LoginPage />,
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
+    element: <HomePage />,
+    children: [
+      {
+        path: "dashboard",
+        element: (
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "carList",
+        element: (
+          <ProtectedRoute>
+            <CarList />
+          </ProtectedRoute>
+        ),
+      },
+    ],
   },
   {
     path: "/addCar",
-    element: <AddCar />,
+    element: (
+      <ProtectedRoute>
+        <AddCar />
+      </ProtectedRoute>
+    ),
   },
   {
-    path: "/listCar",
-    element: <CarList />,
+    path: "/login",
+    element: (
+      <ProtectedLogin>
+        <LoginPage />
+      </ProtectedLogin>
+    ),
   },
   {
     path: "/editCar",
-    element: <EditCar />,
+    element: (
+      <ProtectedRoute>
+        <EditCar />
+      </ProtectedRoute>
+    ),
   },
 ]);
 
