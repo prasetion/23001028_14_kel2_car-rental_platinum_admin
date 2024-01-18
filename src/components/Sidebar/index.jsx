@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { login } from "../../redux/features/login/loginSlice";
 
 import FiHome from "../../assets/assets-navbar/fi-home.svg";
@@ -13,6 +13,8 @@ import "./style.css";
 import SubSidebarDashboard from "../subSidebarDashboard";
 import SubSidebarCar from "../subSidebarCar";
 import { useSelector, useDispatch } from "react-redux";
+// import Dashboard from "../../pages/Dashboard";
+// import CarList from "../../pages/CarList";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -106,7 +108,12 @@ const Sidebar = () => {
               </div>
             </div>
           </div>
-          <div className={`sidebar-second`}>{renderSubSidebar()}</div>
+          <div className="d-flex">
+            <div className={`sidebar-second`}>{renderSubSidebar()}</div>
+            <div className="main-content">
+              <div>{<Outlet />}</div>
+            </div>
+          </div>
         </div>
       </div>
     </>
