@@ -1,4 +1,6 @@
+import { useNavigate } from "react-router-dom";
 const SubSidebarDashboard = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className={`sidebar-second-dashboard`}>
@@ -6,7 +8,7 @@ const SubSidebarDashboard = () => {
           <p>DASHBOARD</p>
         </div>
         <div className="list-sidebar">
-          <a>DASHBOARD</a>
+          <a onClick={() => navigate("dashboard")}>DASHBOARD</a>
         </div>
       </div>
     </>

@@ -212,3 +212,8 @@ label:before {
   background-color: #cfd4ed;
   border-radius: 100%;
 }
+
+.main-content {
+  width: 100%;
+  background-color: rgba(207, 212, 237, 1);
+}
