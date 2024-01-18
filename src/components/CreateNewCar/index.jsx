@@ -4,8 +4,11 @@ import Form from 'react-bootstrap/Form';
 import chevronRight from "../../assets/chevron-right.svg"
 import { Col, Row, Button } from "react-bootstrap";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 const CreateNewCar = () => {
+
+    const navigate = useNavigate();
 
     const [form, setForm] = useState ({
         name: "",
@@ -23,6 +26,7 @@ const CreateNewCar = () => {
         })
     }
 
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         form.price = Number(form.price)
@@ -37,6 +41,7 @@ const CreateNewCar = () => {
 
               const res = await axios.post("https://api-car-rental.binaracademy.org/admin/car", form, config)
               console.log(res.data)
+              navigate("/listCar")
         } catch (err) {
             console.log(err)
         }
@@ -55,7 +60,9 @@ const CreateNewCar = () => {
             <div className="breadcrumb">
                 <h4 className="breadcrumb-text-1">Cars</h4>
                 <img src={chevronRight} alt="" />
+                <Link to={"/listcar"}>
                 <h4 className="breadcrumb-text-1">List Car</h4>
+                </Link>
                 <img src={chevronRight} alt="" />
                 <h5 className="breadcrumb-text-2">Add New Car</h5>
             </div>

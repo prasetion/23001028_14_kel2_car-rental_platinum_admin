@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import carImage from "./../../assets/car_img.png"
 import "./styles.css"
 import chevronRight from "../../assets/chevron-right.svg"
+import { Link } from "react-router-dom";
 
 const ListCar = () => {
 
@@ -29,20 +30,19 @@ const ListCar = () => {
             console.log(err)    
         }
     }
-  };
 
-    return(
+    return (
         <div className="listcar-container">
-            <h1>LIST CAR</h1>
             <div className="breadcrumb">
                 <h4 className="breadcrumb-text-1">Cars</h4>
                 <img src={chevronRight} alt="" />
                 <h4 className="breadcrumb-text-1">List Car</h4>
-                <img src={chevronRight} alt="" />
-                <h5 className="breadcrumb-text-2">Add New Car</h5>
             </div>
-            <div>
-                <h2 className="car-sub-title">Add New Car</h2>
+            <div className="listcar-button-container">
+                <h2 className="car-sub-title">List Car</h2>
+                <Link to={"/addCar"}>
+                <button className="addcar-button"><span>+</span> Add New Car</button>
+                </Link>
             </div>
             <div className="carlist-item">
                 {(cars.map((car, id) => (
@@ -54,6 +54,7 @@ const ListCar = () => {
                             <p id="carlist-typecar">{car.name}</p>
                             <h3 id="catlist-price">Rp {Intl.NumberFormat("es-ES").format(car.price)} / Hari</h3>
                             <p id="carlist-info"><span>{car.start_rent_at}</span>-<span>{car.finish_rent_at}</span></p>
+                            {/* Mengganti tanggal pake Dayjs atau Momentjs */}
                             <p id="carlist-info"><span></span>{car.updatedAt}</p>
                         </div>
                         <div className="carlist-button">
@@ -65,4 +66,6 @@ const ListCar = () => {
             </div>
         </div>
     )
-}
+  };
+
+export default ListCar

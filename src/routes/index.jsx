@@ -4,9 +4,9 @@ import Dashboard from "../pages/Dashboard";
 import CarList from "../pages/CarList";
 import LoginPage from "../pages/LoginPage";
 import EditCar from "../pages/EditCar";
-import LoginPage from "../pages/LoginPage";
 import ProtectedLogin from "../hoc/ProtectedLogin";
 import ProtectedRoute from "../hoc/ProtectedRoute";
+import DeleteCar from "../components/DeleteCar";
 
 const routers = createBrowserRouter([
   {
@@ -29,6 +29,10 @@ const routers = createBrowserRouter([
     path: "/editCar",
     element: <EditCar />,
   },
+  {
+    path: "/deletecar",
+    element: <DeleteCar/>,
+  }
 ]);
 
 const Router = () => {

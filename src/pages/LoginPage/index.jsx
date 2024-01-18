@@ -22,7 +22,7 @@ const LoginPage = () => {
     };
 
     dispatch(login(payload)).then(() => {
-      navigate("/");
+      navigate("/dashboard");
     });
     console.log(payload);
   };

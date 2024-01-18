@@ -9,6 +9,32 @@
     align-items: center;
 }
 
+.listcar-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.addcar-button {
+    border: none;
+
+    color: var(--Neutral-10, #FFF);
+    font-family: Arial;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 142.857% */
+
+    display: inline-flex;
+    padding: 8px 12px;
+    align-items: center;
+    gap: 12px;
+
+    border-radius: 2px;
+    background: var(--Primary-DarkBlue-04, #0D28A6);
+}
+
 .carlist-item {
     display: flex;
     flex-wrap: wrap;
