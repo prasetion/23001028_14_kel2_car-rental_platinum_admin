@@ -1,8 +1,12 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const DeleteCar = () => {
     const [car, setCar] = useState([])
+
+    useEffect(() => {
+
+    }, [])
 
     const handleDelete = async (e) => {
         e.preventDefault()

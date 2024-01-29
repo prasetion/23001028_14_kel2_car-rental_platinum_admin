@@ -1,0 +1,35 @@
+#input-with-upload-image {
+    display: none;
+}
+
+.input-style {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 2px;
+    border: 1px solid var(--Neutral-02, #D0D0D0);
+    background: var(--Neutral-01, #FFF);
+    width: 315px;
+
+    display: flex;
+    padding: 9px 12px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.addcar-input-form-1 input {
+    border-radius: 2px;
+    border: 1px solid var(--Neutral-02, #D0D0D0);
+    background: var(--Neutral-01, #FFF);
+
+    display: flex;
+    padding: 9px 12px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.category-option {
+    display: flex;
+    justify-content: space-between;
+}

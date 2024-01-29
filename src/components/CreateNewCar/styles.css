@@ -98,13 +98,14 @@
     line-height: 18px; /* 150% */
 }
 
-#select-cars {
+select {
     width: 315px;
     display: flex;
     padding: 9px 12px;
     align-items: center;
     gap: 8px;
     align-self: stretch;
+
     border-radius: 2px;
     border: 1px solid var(--Neutral-04, #3C3C3C);
     background: var(--Neutral-01, #FFF);
@@ -131,7 +132,7 @@
 
 #input-with-upload-image {
     background-color: white;
-    background-image: url('D:\3. Boothcamp\Challange Platinum\23001028_14_kel2_car-rental_platinum_admin\src\assets\fi_upload.svg');
+    /* background-image: url('D:\3. Boothcamp\Challange Platinum\23001028_14_kel2_car-rental_platinum_admin\src\assets\fi_upload.svg'); */
     background-position: right 10px top 10px;
     background-repeat: no-repeat;
     padding-right: 40px;

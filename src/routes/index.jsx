@@ -49,7 +49,7 @@ const routers = createBrowserRouter([
     ),
   },
   {
-    path: "/editCar",
+    path: "/editCar/:id",
     element: (
       <ProtectedRoute>
         <EditCar />

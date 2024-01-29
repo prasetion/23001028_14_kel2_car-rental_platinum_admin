@@ -1,3 +1,7 @@
+.d-flex {
+  position: relative;
+}
+
 .navbar-sidebar {
   display: inline-flex;
   height: 100vh;

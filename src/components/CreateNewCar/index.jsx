@@ -5,6 +5,7 @@ import chevronRight from "../../assets/chevron-right.svg"
 import { Col, Row, Button } from "react-bootstrap";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import uploadIcon from "../../assets/fi_upload.svg"
 
 const CreateNewCar = () => {
 
@@ -31,7 +32,7 @@ const CreateNewCar = () => {
         e.preventDefault()
         form.price = Number(form.price)
         try {
-            const token = localStorage.getItem("accessToken")
+            const token = localStorage.getItem("access_token")
 
             const config = {
                 headers: {
@@ -41,7 +42,7 @@ const CreateNewCar = () => {
 
               const res = await axios.post("https://api-car-rental.binaracademy.org/admin/car", form, config)
               console.log(res.data)
-              navigate("/listCar")
+              navigate("/carlist")
         } catch (err) {
             console.log(err)
         }
@@ -60,7 +61,7 @@ const CreateNewCar = () => {
             <div className="breadcrumb">
                 <h4 className="breadcrumb-text-1">Cars</h4>
                 <img src={chevronRight} alt="" />
-                <Link to={"/listcar"}>
+                <Link to={"/carlist"}>
                 <h4 className="breadcrumb-text-1">List Car</h4>
                 </Link>
                 <img src={chevronRight} alt="" />
@@ -70,35 +71,6 @@ const CreateNewCar = () => {
                 <h2 className="car-sub-title">Add New Car</h2>
             <div className="addcar-input-container">
                 <div className="addcar-input-form">
-                    {/* <Form.Group as={Row} className="mb-3" controlId="formName">
-                        <Form.Label column sm="2" className="custom-label">Nama/Tipe Mobil<span className="asterisk">*</span></Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="text" placeholder="Input Nama/Tipe Mobil" />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} className="mb-3" controlId="formPrice">
-                        <Form.Label column sm="2" >Harga<span className="asterisk">*</span></Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="text" placeholder="Input Harga Sewa Mobil" />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} className="mb-3" controlId="formImage">
-                        <Form.Label column sm="2">Kategori<span className="asterisk">*</span></Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="file" placeholder="Upload Foto Mobil" />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} className="mb-3" controlId="formImage">
-                        <Form.Label column sm="2">Kategori<span className="asterisk">*</span></Form.Label>
-                        <Col sm="10">
-                        <Form.Select aria-label="Default select example">
-                            <option>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </Form.Select>
-                        </Col>
-                    </Form.Group> */}
                     <div className="addcar-input-form-1">
                         <p>Nama<span className="asterisk">*</span></p>
                         <input onChange={handleChange} name="name" type="text" />
@@ -111,6 +83,7 @@ const CreateNewCar = () => {
                         <p>Foto<span className="asterisk">*</span></p>
                         <div>
                             <input onChange={handleChange} name="image" type="file" id="input-with-upload-image" />
+                            <label htmlFor="input-with-upload-image" className="input-style">Pilih gambar<span><img src={uploadIcon} alt="" /></span></label>
                             <p id="requirement-text-image">File size max. 2MB</p>
                         </div>
                     </div>
@@ -135,7 +108,9 @@ const CreateNewCar = () => {
                 </div>
             </div>
             <div className="button-container">
+                <Link to={"/carlist"}>
                 <button className="button-cancel">Cancel</button>
+                </Link>
                 <button className="button-save" onClick={handleSubmit}>Save</button>
             </div>
             </div>

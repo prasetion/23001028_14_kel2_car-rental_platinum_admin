@@ -1,12 +1,9 @@
-// import ListCar from "../../components/ListCar";
+import ListCar from "../../components/ListCar";
 
 const CarList = () => {
   return (
     <div>
-      {/* <ListCar /> */}
-      <h1>CarList</h1>
-      <h1>CarList</h1>
-      <h1>CarList</h1>
+      <ListCar />
     </div>
   );
 };

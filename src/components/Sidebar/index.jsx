@@ -13,6 +13,7 @@ import "./style.css";
 import SubSidebarDashboard from "../subSidebarDashboard";
 import SubSidebarCar from "../subSidebarCar";
 import { useSelector, useDispatch } from "react-redux";
+import { getCarList, setFilter } from "../../redux/features/listcar/carListSlice";
 // import Dashboard from "../../pages/Dashboard";
 // import CarList from "../../pages/CarList";
 
@@ -24,9 +25,20 @@ const Sidebar = () => {
   const { success } = useSelector((state) => state.login);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [name, setName] = useState("")
+  const [category, setCategory] = useState("")
 
   function handleSideCar() {
     setSideCar(!sideCar);
+  }
+
+  const handleSubmit = () => {
+    dispatch(setFilter({name, category}))
+    dispatch(getCarList({name, category}))
+  }
+
+  const handleChangeName = (e) => {
+    setName(e.target.value)
   }
 
   function handleSideDashboard() {
@@ -88,9 +100,9 @@ const Sidebar = () => {
             <div className="header-2">
               <div className="search-bar">
                 <label htmlFor="">
-                  <input type="text" placeholder={`      Search`} />
+                  <input onChange={handleChangeName} type="text" placeholder={`      Search`} />
                 </label>
-                <button className="btn btn-search">Search</button>
+                <button onClick={handleSubmit} className="btn btn-search">Search</button>
               </div>
               <div className="user-account">
                 <p className="icon-account btn m-auto">{username[0]}</p>

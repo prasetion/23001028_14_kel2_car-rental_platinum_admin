@@ -1,8 +1,75 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css"
 import chevronRight from "../../assets/chevron-right.svg"
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import uploadIcon from "../../assets/fi_upload.svg"
+import downIcon from "../../assets/fi-chevron-down.svg"
 
 const EditCarList = () => {
+
+    const {id} = useParams()
+    const [cars, setCars] = useState({
+        name: "",
+        category: "",
+        price: "",
+        status: "",
+        image: ""
+    })
+
+    useEffect(() => {
+        getCars(id)
+    }, [])
+
+    const getCars = async (idCar) => {
+        try {
+            const token = localStorage.getItem("access_token")
+
+            const config = {
+                headers: {
+                  access_token: `${token}`,
+                },
+              };
+            
+            const res = await axios.get(`https://api-car-rental.binaracademy.org/admin/car/${idCar}`, config, cars)
+            setCars(res.data)
+            console.log(res.data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const handleChange = (e) => {
+        const {name, value} = e.target
+        console.log(name, value)
+        setCars({
+            ...cars,
+            [name]: value,
+        })
+    }
+
+    const handleSubmit = async (e) => {
+        // e.preventDefault()
+        cars.price = Number(cars.price)
+        try {
+            const token = localStorage.getItem("accessToken")
+
+            const config = {
+                headers: {
+                  access_token: `${token}`,
+                },
+              };
+
+            const res = await axios.put(`https://api-car-rental.binaracademy.org/admin/car/${id}`, cars, config)
+            console.log(res)
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
+
+
     return (
         <div>
             <div className="addcar-container">
@@ -19,27 +86,27 @@ const EditCarList = () => {
                     <div className="addcar-input-form">
                         <div className="addcar-input-form-1">
                             <p>Nama<span className="asterisk">*</span></p>
-                            <input type="text" />
+                            <input className="input-style" type="text" onChange={handleChange} name="name" value={cars.name}/>
                         </div>
                         <div className="addcar-input-form-1">
                             <p>Harga<span className="asterisk">*</span></p>
-                            <input type="text" />
+                            <input type="text" onChange={handleChange} name="price" value={cars.price} />
                         </div>
                         <div className="addcar-input-form-1">
                             <p>Foto<span className="asterisk">*</span></p>
                             <div>
-                                <input type="file" id="input-with-upload-image" />
+                                <input type="file" id="input-with-upload-image" onChange={handleChange} name="image" placeholder={cars.image} />
+                                <label for="input-with-upload-image" className="input-style">Pilih gambar<span><img src={uploadIcon} alt="" /></span></label>
                                 <p id="requirement-text-image">File size max. 2MB</p>
                             </div>
                         </div>
                         <div className="addcar-input-form-1">
                             <p>Kategori<span className="asterisk">*</span></p>
-                            <select name="" id="select-cars">
-                                <option value="">1 mobil</option>
-                                <option value="">2 mobil</option>
-                                <option value="">3 mobil</option>
-                                <option value="">4   mobil</option>
-
+                            <select id="select-cars" onChange={handleChange} name="category" value={cars.category}>
+                                {/* <option value="">Kategori</option> */}
+                                <option className="category-option" value="small">2 - 4 people <span><img src={downIcon}/></span></option>
+                                <option value="medium">4 - 6 people</option>
+                                <option value="large">6 - 8 people</option>
                             </select>
                         </div>
                         <div className="addcar-input-form-2">
@@ -53,8 +120,10 @@ const EditCarList = () => {
                     </div>
                 </div>
                 <div className="button-container">
+                    <Link to={"/carlist"}>
                     <button className="button-cancel">Cancel</button>
-                    <button className="button-save">Save</button>
+                    </Link>
+                    <button className="button-save" onClick={handleSubmit}>Save</button>
                 </div>
                 </div>
             </div>
