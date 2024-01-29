@@ -29,7 +29,7 @@ const LoginPage = () => {
     // setErrorMessage("");
 
     dispatch(login(payload)).then(() => {
-      navigate("/");
+      navigate("/dashboard");
     });
   };
 

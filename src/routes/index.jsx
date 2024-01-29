@@ -7,6 +7,7 @@ import EditCar from "../pages/EditCar";
 import ProtectedLogin from "../hoc/ProtectedLogin";
 import ProtectedRoute from "../hoc/ProtectedRoute";
 import HomePage from "../pages/HomePage";
+import DeleteCar from "../components/DeleteCar";
 
 const routers = createBrowserRouter([
   {
@@ -52,13 +53,17 @@ const routers = createBrowserRouter([
     ),
   },
   {
-    path: "/editCar",
+    path: "/editCar/:id",
     element: (
       <ProtectedRoute>
         <EditCar />
       </ProtectedRoute>
     ),
   },
+  {
+    path: "/deletecar",
+    element: <DeleteCar/>,
+  }
 ]);
 
 const Router = () => {
