@@ -12,7 +12,11 @@ import DeleteCar from "../components/DeleteCar";
 const routers = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: (
+      <ProtectedRoute>
+        <HomePage />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "dashboard",

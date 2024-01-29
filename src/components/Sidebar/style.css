@@ -4,8 +4,8 @@
 
 .navbar-sidebar {
   display: inline-flex;
-  height: 100vh;
-  width: 80px;
+  height: auto;
+  width: 75px;
   padding: 18px 0px 704px 0px;
   flex-direction: column;
   align-items: center;
@@ -19,6 +19,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 }
 
 .logo-home {
@@ -82,6 +83,7 @@
 
 .navbar-sidebar-second {
   width: 100%;
+  height: auto;
 }
 
 .header {
@@ -171,21 +173,31 @@
   align-items: flex-start;
 }
 
-.search-bar input {
-  display: flex;
-  align-items: flex-start;
-  padding: 8px 10px;
-  border: 1px solid var(--Neutral-02, #d0d0d0);
+.search-container {
+  position: relative;
 }
 
-label:before {
-  content: "";
+.input {
+  display: flex;
+  padding: 9px 12px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 2px;
+  border: 1px solid var(--Neutral-02, #d0d0d0);
+  background: var(--Neutral-01, #fff);
+}
+
+.search-icon {
   position: absolute;
-  top: 0;
-  bottom: 0;
-  margin-left: 10px;
-  width: 20px;
-  background: url("../../assets/assets-navbar/search.svg") center / contain no-repeat;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  /* Gaya lainnya sesuai kebutuhan desain Anda */
+}
+
+.hidden {
+  display: none;
 }
 
 .btn-search {
@@ -219,5 +231,5 @@ label:before {
 
 .main-content {
   width: 100%;
-  background-color: rgba(207, 212, 237, 1);
+  background-size: 100%;
 }

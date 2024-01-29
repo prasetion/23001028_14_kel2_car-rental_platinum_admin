@@ -1,30 +1,29 @@
-// import Sidebar from "../../components/Sidebar";
-import "./style.css";
+import ChartDiagram from "../../components/ChartDiagram";
+import Rectangle from "../../assets/assets-dashboard/Rectangle.png";
+import TableDashboard from "../../components/TableDashboard";
 
 const Dashboard = () => {
   return (
     <>
-      <div className="dashboard">
-        <div>{/* <Sidebar /> */}</div>
-        <h1>Dashboard</h1>
-        <h1>Dashboard</h1>
-        <h1>Dashboard</h1>
-        <h1>Dashboard</h1>
+      <div className="dashboard mt-3">
+        <div className="dashboard-title">
+          <h5>
+            <b>Dashborad &gt;</b> Dashboard
+          </h5>
+        </div>
 
-        <h1>Dashboard</h1>
-        <h1>Dashboard</h1>
-        <h1>Dashboard</h1>
-        <h1>Dashboard</h1>
-
-        <h1>Dashboard</h1>
-        <h1>Dashboard</h1>
-        <h1>Dashboard</h1>
-        <h1>Dashboard</h1>
-
-        <h1>Dashboard</h1>
-        <h1>Dashboard</h1>
-        <h1>Dashboard</h1>
-        <h1>Dashboard</h1>
+        <div className="d-flex gap-2 mt-5 ms-4">
+          <img src={Rectangle} alt="" style={{ width: "5px", height: "30px" }} />
+          <p>
+            <b>Rented Car Data Visualization</b>
+          </p>
+        </div>
+        <div className="mb-5">
+          <ChartDiagram />
+        </div>
+        <div>
+          <TableDashboard />
+        </div>
       </div>
     </>
   );

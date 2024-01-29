@@ -1,0 +1,56 @@
+.blue-line {
+  width: 4px;
+  height: 24px;
+  background-color: #0d28a6;
+}
+
+.sub-text-header-dashboard {
+  color: #000;
+  font-family: Arial;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.text-dashboard {
+  color: #000;
+  font-family: Arial;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.input-group {
+  border-radius: 2px 0px 0px 2px;
+}
+
+.form-select {
+  padding: 8px 5px 8px 12px;
+  font-family: Arial;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.go {
+  font-family: Rubik;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.form-select {
+  display: flex;
+  padding: 8px 5px 8px 12px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 21px;
+  border-radius: 2px 0px 0px 2px;
+  border: 1px solid var(--Neutral-02, #d0d0d0);
+  background: var(--Neutral-01, #fff);
+  width: 15rem;
+}

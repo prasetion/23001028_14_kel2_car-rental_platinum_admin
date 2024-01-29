@@ -16,8 +16,7 @@ export const login = createAsyncThunk("login/login", async(payload) => {
 const initialState = {
     success: "",
     loading: false,
-    error: "",
-    email: ""
+    error: ""
 }
 
 
