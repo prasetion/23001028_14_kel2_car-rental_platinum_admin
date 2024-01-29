@@ -7,23 +7,21 @@ import Car from "../../assets/assets-navbar/car.svg";
 import Logo from "../../assets/assets-navbar/logo.svg";
 import { FiMenu } from "react-icons/fi";
 import { IoChevronDown } from "react-icons/io5";
+import Search from "../../assets/assets-navbar/search.svg";
 import "./style.css";
-// import style from "../../assets/style.module.css";
 
 import SubSidebarDashboard from "../subSidebarDashboard";
 import SubSidebarCar from "../subSidebarCar";
-import { useSelector, useDispatch } from "react-redux";
-// import Dashboard from "../../pages/Dashboard";
-// import CarList from "../../pages/CarList";
+import { useDispatch } from "react-redux";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
   const [sideCar, setSideCar] = useState(true);
   const [sideDashboard, setSideDashboard] = useState(false);
   const [username, setUsername] = useState("");
-  const { success } = useSelector((state) => state.login);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [searchText, setSearchText] = useState("");
 
   function handleSideCar() {
     setSideCar(!sideCar);
@@ -49,7 +47,10 @@ const Sidebar = () => {
     });
   }, []);
 
-  console.log("test", success);
+  const handleInputChange = (e) => {
+    setSearchText(e.target.value);
+  };
+
   const renderSubSidebar = () => {
     if (sideDashboard === true) {
       return <SubSidebarDashboard /> || <SubSidebarCar className="d-none" />;
@@ -87,10 +88,13 @@ const Sidebar = () => {
             </div>
             <div className="header-2">
               <div className="search-bar">
-                <label htmlFor="">
-                  <input type="text" placeholder={`      Search`} />
-                </label>
-                <button className="btn btn-search">Search</button>
+                <div className="search-container">
+                  <input type="text" placeholder={"     Search..."} value={searchText} onChange={handleInputChange} className="input" />
+                  <img src={Search} alt="Search" className={`search-icon ${searchText ? "hidden" : ""}`} />
+                </div>
+                <button className="btn btn-search" style={{ height: "43px" }}>
+                  Search
+                </button>
               </div>
               <div className="user-account">
                 <p className="icon-account btn m-auto">{username[0]}</p>
@@ -109,10 +113,10 @@ const Sidebar = () => {
             </div>
           </div>
           <div className="d-flex">
-            <div className={`sidebar-second`}>{renderSubSidebar()}</div>
-            <div className="main-content">
-              <div>{<Outlet />}</div>
+            <div className={`sidebar-second`} style={{ borderRight: "1px solid #CFD4ED", marginRight: "20px" }}>
+              {renderSubSidebar()}
             </div>
+            <div className="main-content">{<Outlet />}</div>
           </div>
         </div>
       </div>

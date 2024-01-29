@@ -11,7 +11,11 @@ import HomePage from "../pages/HomePage";
 const routers = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: (
+      <ProtectedRoute>
+        <HomePage />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: "dashboard",
