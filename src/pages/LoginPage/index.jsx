@@ -10,7 +10,8 @@ import { useNavigate } from "react-router-dom";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { error } = useSelector((state) => state.login);
+  const [errorMessage, setErrorMessage] = useState("");
+  const { error, loading } = useSelector((state) => state.login);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,10 +22,15 @@ const LoginPage = () => {
       password: password,
     };
 
+    if (!email || !password) {
+      setErrorMessage("Please fill in all fields");
+      return;
+    }
+    // setErrorMessage("");
+
     dispatch(login(payload)).then(() => {
       navigate("/");
     });
-    console.log(payload);
   };
 
   const handleKeyDown = (e) => {
@@ -45,6 +51,11 @@ const LoginPage = () => {
           {error && (
             <div className="error-message">
               <p>{error}</p>
+            </div>
+          )}
+          {errorMessage && (
+            <div className="error-message">
+              <p>{errorMessage}</p>
             </div>
           )}
           <div style={{ width: "100%" }}>
