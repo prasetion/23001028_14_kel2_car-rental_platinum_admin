@@ -7,6 +7,7 @@ import EditCar from "../pages/EditCar";
 import ProtectedLogin from "../hoc/ProtectedLogin";
 import ProtectedRoute from "../hoc/ProtectedRoute";
 import HomePage from "../pages/HomePage";
+import DeleteCar from "../components/DeleteCar";
 
 const routers = createBrowserRouter([
   {
@@ -33,16 +34,32 @@ const routers = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "editCar/:id",
+        element: (
+          <ProtectedRoute>
+            <EditCar />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "addCar",
+        element: (
+          <ProtectedRoute>
+            <AddCar />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
-  {
-    path: "/addCar",
-    element: (
-      <ProtectedRoute>
-        <AddCar />
-      </ProtectedRoute>
-    ),
-  },
+  // {
+  //   path: "/addCar",
+  //   element: (
+  //     <ProtectedRoute>
+  //       <AddCar />
+  //     </ProtectedRoute>
+  //   ),
+  // },
   {
     path: "/login",
     element: (
@@ -52,12 +69,16 @@ const routers = createBrowserRouter([
     ),
   },
   {
-    path: "/editCar",
+    path: "/editCar/:id",
     element: (
       <ProtectedRoute>
         <EditCar />
       </ProtectedRoute>
     ),
+  },
+  {
+    path: "/deletecar",
+    element: <DeleteCar />,
   },
 ]);
 

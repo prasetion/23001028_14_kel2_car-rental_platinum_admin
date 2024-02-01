@@ -13,6 +13,12 @@ const ChartDiagram = () => {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleGetListOrderMount = () => {
+    if (selectedOption === "") {
+      // Handle the case when no option is selected
+      alert("Please choose a month before proceeding.");
+      return; // or perform any other action you want for this case
+    }
+
     const token = localStorage.getItem("access_token");
     const param = selectedOption;
 
