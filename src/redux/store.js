@@ -4,6 +4,9 @@ import carListReducer from "./features/listcar/carListSlice"
 import deleteCarSlice from "./features/deletecar/deleteCarSlice";
 import listOrderChartSlice from "./features/listOrderChart/listOrderChartSlice"
 import { tableDashboardSlice } from "./features/tableDashboard/tableDashboardSlice";
+import createCarSlice from "./features/createCar/createCarSlice";
+import editCarSlice from "./features/editCar/editCarSlice";
+import getCarIdSlice from "./features/getCarId/getCarIdSlice";
 
 export const store = configureStore({
     reducer: {
@@ -12,5 +15,8 @@ export const store = configureStore({
         deleteCar: deleteCarSlice,
         listOrderChart: listOrderChartSlice,
         tableDashboard: tableDashboardSlice,
+        createCar: createCarSlice,
+        editCar: editCarSlice,
+        getCarId: getCarIdSlice
     },
 })

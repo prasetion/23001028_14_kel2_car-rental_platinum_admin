@@ -6,9 +6,16 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import uploadIcon from "../../assets/fi_upload.svg"
 import downIcon from "../../assets/fi-chevron-down.svg"
+import { useDispatch, useSelector } from "react-redux";
+import { editCar } from "../../redux/features/editCar/editCarSlice";
+import { getCarId } from "../../redux/features/getCarId/getCarIdSlice";
+
 
 const EditCarList = () => {
 
+    const dispatch = useDispatch()
+    const {success: getCarIdSuccess, loading: getCarIdLoading, error: getCarIdError} = useSelector ((state) => state.getCarId)
+    const {success, loading, error} = useSelector ((state) => state.editCar)
     const {id} = useParams()
     const [cars, setCars] = useState({
         name: "",
@@ -23,23 +30,10 @@ const EditCarList = () => {
     }, [])
 
     const getCars = async (idCar) => {
-        try {
-            const token = localStorage.getItem("access_token")
-
-            const config = {
-                headers: {
-                  access_token: `${token}`,
-                },
-              };
-            
-            const res = await axios.get(`https://api-car-rental.binaracademy.org/admin/car/${idCar}`, config, cars)
-            setCars(res.data)
-            console.log(res.data)
-        } catch (err) {
-            console.log(err)
-        }
+        dispatch(getCarId({idCar, cars}))
     }
 
+    
     const handleChange = (e) => {
         const {name, value} = e.target
         console.log(name, value)
@@ -49,23 +43,10 @@ const EditCarList = () => {
         })
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (cars) => {
         // e.preventDefault()
         cars.price = Number(cars.price)
-        try {
-            const token = localStorage.getItem("accessToken")
-
-            const config = {
-                headers: {
-                  access_token: `${token}`,
-                },
-              };
-
-            const res = await axios.put(`https://api-car-rental.binaracademy.org/admin/car/${id}`, cars, config)
-            console.log(res)
-        } catch (err) {
-            console.log(err)
-        }
+        dispatch(editCar({id, cars}))
 
     }
 
