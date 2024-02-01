@@ -21,6 +21,8 @@ const ListCar = () => {
 
 
     useEffect(() => {
+        // modal berhasil create car state success dipanggil di sini
+        // search button
         dispatch(getCarList({name, category}))
         setActiveButton(1)
     }, [])
@@ -40,16 +42,27 @@ const ListCar = () => {
         setSelectedCar(carId)
     }
 
-
     const handleDelete = async (id) => {
-        dispatch(deleteCar({id}))
+        try {
+            await dispatch(deleteCar({id}))
+            await dispatch(getCarList({name, category}))
+            await setConfirmation(!confirmation)
+            await setSuccessModal(true)
+            setTimeout(() => {
+                setSuccessModal(false);
+              }, 2000);
+        } catch (error) {
+            
+        }
     }
 
     return (
         <div className="listcar-container">
             {successModal && (
-            <div className="success-modal">
-                <p>Data Berhasil Dihapus</p>
+            <div className="success-modal-container">
+                <div className="success-modal">
+                    <p>Data Berhasil Dihapus</p>
+                </div>
             </div>
             )}
             {confirmation && (

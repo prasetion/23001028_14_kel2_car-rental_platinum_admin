@@ -151,6 +151,11 @@ button:target {
     line-height: 20px; /* 142.857% */
 }
 
+.success-modal-container {
+    display: flex;
+    justify-content: center;
+}
+
 .success-modal {
     position: absolute;
     display: flex;
@@ -169,6 +174,7 @@ button:target {
     flex: 1 0 0;
     color: var(--Neutral-10, #FFF);
     text-align: center;
+    margin: 0;
 
     /* Text L/Medium */
     font-family: Arial, Helvetica, sans-serif;
