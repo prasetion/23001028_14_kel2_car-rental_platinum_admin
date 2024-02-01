@@ -1,10 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const deleteCar = createAsyncThunk("deleteCar", async ({id}) => {
+export const editCar = createAsyncThunk("editCar", async ({id, cars}) => {
     try {
-
-        const token = localStorage.getItem("access_token");
+        const token = localStorage.getItem("accessToken")
 
         const config = {
             headers: {
@@ -12,8 +11,7 @@ export const deleteCar = createAsyncThunk("deleteCar", async ({id}) => {
             },
           };
 
-
-        const res = await axios.delete(`https://api-car-rental.binaracademy.org/admin/car/${id}`, config) 
+        const res = await axios.put(`https://api-car-rental.binaracademy.org/admin/car/${id}`, cars, config)
         console.log(res)
     } catch (err) {
         console.log(err)
@@ -21,29 +19,29 @@ export const deleteCar = createAsyncThunk("deleteCar", async ({id}) => {
 })
 
 const initialState = {
-    id: "",
+    success: "",
     loading: false,
-    error: null
+    error: null,
 }
 
-const deleteCarSlice = createSlice({
-    name: "deleteCar",
+const editCarSlice = createSlice({
+    name: "editCar",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
-        .addCase(deleteCar.pending, (state) => {
+        .addCase(editCar.pending, (state) => {
             state.loading = true
         })
-        .addCase(deleteCar.fulfilled, (state, action) => {
+        .addCase(editCar.fulfilled, (state, action) => {
             state.loading = false
             state.delete = action.payload
         })
-        .addCase(deleteCar.rejected, (state, action) => {
+        .addCase(editCar.rejected, (state, action) => {
             state.loading = false
             state.error = action.error.message
         })
     }
 })
 
-export default deleteCarSlice.reducer
+export default editCarSlice.reducer

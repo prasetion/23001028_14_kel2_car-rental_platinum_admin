@@ -6,8 +6,12 @@ import { Col, Row, Button } from "react-bootstrap";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import uploadIcon from "../../assets/fi_upload.svg"
+import { useDispatch, useSelector } from "react-redux";
+import { createCar } from "../../redux/features/createCar/createCarSlice";
 
 const CreateNewCar = () => {
+    const dispatch = useDispatch()
+    const {id, loading, error} = useSelector ((state) => state.createCar)
 
     const navigate = useNavigate();
 
@@ -30,22 +34,12 @@ const CreateNewCar = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        form.price = Number(form.price)
-        try {
-            const token = localStorage.getItem("access_token")
-
-            const config = {
-                headers: {
-                  access_token: `${token}`,
-                },
-              };
-
-              const res = await axios.post("https://api-car-rental.binaracademy.org/admin/car", form, config)
-              console.log(res.data)
-              navigate("/carlist")
-        } catch (err) {
-            console.log(err)
+        if (!form.name || !form.price || !form.image || !form.category) {
+            alert("Data harus diisi");
+            return;
         }
+        dispatch(createCar({form}))
+        // navigate("/carlist")
 
     }
 
@@ -111,7 +105,7 @@ const CreateNewCar = () => {
                 <Link to={"/carlist"}>
                 <button className="button-cancel">Cancel</button>
                 </Link>
-                <button className="button-save" onClick={handleSubmit}>Save</button>
+                <button className="button-save" onClick={(e) => handleSubmit(e, form)}>Save</button>
             </div>
             </div>
         </div>
