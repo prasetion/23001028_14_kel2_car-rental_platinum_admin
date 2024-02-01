@@ -34,16 +34,32 @@ const routers = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "editCar/:id",
+        element: (
+          <ProtectedRoute>
+            <EditCar />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "addCar",
+        element: (
+          <ProtectedRoute>
+            <AddCar />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
-  {
-    path: "/addCar",
-    element: (
-      <ProtectedRoute>
-        <AddCar />
-      </ProtectedRoute>
-    ),
-  },
+  // {
+  //   path: "/addCar",
+  //   element: (
+  //     <ProtectedRoute>
+  //       <AddCar />
+  //     </ProtectedRoute>
+  //   ),
+  // },
   {
     path: "/login",
     element: (
@@ -62,8 +78,8 @@ const routers = createBrowserRouter([
   },
   {
     path: "/deletecar",
-    element: <DeleteCar/>,
-  }
+    element: <DeleteCar />,
+  },
 ]);
 
 const Router = () => {

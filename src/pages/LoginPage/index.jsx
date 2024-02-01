@@ -11,7 +11,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { error, loading } = useSelector((state) => state.login);
+  const { error } = useSelector((state) => state.login);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
