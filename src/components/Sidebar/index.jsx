@@ -12,7 +12,9 @@ import "./style.css";
 
 import SubSidebarDashboard from "../subSidebarDashboard";
 import SubSidebarCar from "../subSidebarCar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getCarList, setFilter } from "../../redux/features/listcar/carListSlice";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -22,6 +24,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchText, setSearchText] = useState("");
+  const {cars, name, category, loading: carListLoading, error: carListError} = useSelector((state) => state.carList)
 
   function handleSideCar() {
     setSideCar(!sideCar);
@@ -49,7 +52,14 @@ const Sidebar = () => {
 
   const handleInputChange = (e) => {
     setSearchText(e.target.value);
+    dispatch(setFilter({name, category}))
   };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    dispatch(setFilter({name: searchText, category}))
+    dispatch(getCarList({name: searchText, category}))
+  }
 
   const renderSubSidebar = () => {
     if (sideDashboard === true) {
@@ -92,7 +102,7 @@ const Sidebar = () => {
                   <input type="text" placeholder={"     Search..."} value={searchText} onChange={handleInputChange} className="input" />
                   <img src={Search} alt="Search" className={`search-icon ${searchText ? "hidden" : ""}`} />
                 </div>
-                <button className="btn btn-search" style={{ height: "43px" }}>
+                <button className="btn btn-search" style={{ height: "43px" }} onClick={handleSearch}>
                   Search
                 </button>
               </div>
