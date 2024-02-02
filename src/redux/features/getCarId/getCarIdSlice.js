@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getCarId = createAsyncThunk("getCarId", async ({idCar, cars}) => {
+export const getCarId = createAsyncThunk("getCarId", async ({idCar}) => {
     try {
         const token = localStorage.getItem("access_token")
 
@@ -11,7 +11,7 @@ export const getCarId = createAsyncThunk("getCarId", async ({idCar, cars}) => {
             },
           };
         
-        const res = await axios.get(`https://api-car-rental.binaracademy.org/admin/car/${idCar}`, config, cars)
+        const res = await axios.get(`https://api-car-rental.binaracademy.org/admin/car/${idCar}`, config)
         // setCars(res.data)
         console.log(res.data)
     } catch (err) {
@@ -37,7 +37,7 @@ const getCarIdSlice = createSlice({
         })
         .addCase(getCarId.fulfilled, (state, action) => {
             state.loading = false
-            state.create = action.payload
+            state.getCarId = action.payload
         })
         .addCase(getCarId.rejected, (state, action) => {
             state.loading = false

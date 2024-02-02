@@ -9,6 +9,7 @@ import downIcon from "../../assets/fi-chevron-down.svg"
 import { useDispatch, useSelector } from "react-redux";
 import { editCar } from "../../redux/features/editCar/editCarSlice";
 import { getCarId } from "../../redux/features/getCarId/getCarIdSlice";
+import { setCars } from "../../redux/features/editCar/editCarSlice";
 
 
 const EditCarList = () => {
@@ -37,15 +38,14 @@ const EditCarList = () => {
     const handleChange = (e) => {
         const {name, value} = e.target
         console.log(name, value)
-        setCars({
-            ...carById,
+        dispatch(setCars({
+            ...cars,
             [name]: value,
-        })
+        }))
     }
 
-    const handleSubmit = async (cars) => {
-        // e.preventDefault()
-        cars.price = Number(cars.price)
+    const handleSubmit = async () => {
+        // cars.price = Number(cars.price)
         dispatch(editCar({id, cars}))
 
     }

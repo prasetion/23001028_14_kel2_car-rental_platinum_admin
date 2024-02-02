@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const editCar = createAsyncThunk("editCar", async ({id, cars}) => {
     try {
-        const token = localStorage.getItem("accessToken")
+        const token = localStorage.getItem("access_token")
 
         const config = {
             headers: {
@@ -13,13 +13,13 @@ export const editCar = createAsyncThunk("editCar", async ({id, cars}) => {
 
         const res = await axios.put(`https://api-car-rental.binaracademy.org/admin/car/${id}`, cars, config)
         console.log(res)
+        return res.data
     } catch (err) {
         console.log(err)
     }
 })
 
 const initialState = {
-    car: [],
     success: "",
     loading: false,
     error: null,
@@ -28,7 +28,16 @@ const initialState = {
 const editCarSlice = createSlice({
     name: "editCar",
     initialState,
-    reducers: {},
+    reducers: {
+        setCars: (state, action) => {
+            state.name = action.payload.name
+            state.category = action.payload.category
+            state.price = action.payload.price
+            state.status = action.payload.status
+            state.image = action.payload.image
+        }
+
+    },
     extraReducers: (builder) => {
         builder
         .addCase(editCar.pending, (state) => {
@@ -36,7 +45,7 @@ const editCarSlice = createSlice({
         })
         .addCase(editCar.fulfilled, (state, action) => {
             state.loading = false
-            state.delete = action.payload
+            state.editCar = action.payload
         })
         .addCase(editCar.rejected, (state, action) => {
             state.loading = false
@@ -45,4 +54,6 @@ const editCarSlice = createSlice({
     }
 })
 
+
+export const { setCars } = editCarSlice.actions
 export default editCarSlice.reducer

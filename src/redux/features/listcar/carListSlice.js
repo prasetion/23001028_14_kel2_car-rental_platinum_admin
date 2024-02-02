@@ -12,11 +12,11 @@ export const getCarList = createAsyncThunk(
         },
       };
       const res = await axios.get(
-        `https://api-car-rental.binaracademy.org/admin/v2/car?name=${name}&category=${category}&page=1&pageSize=10`,
+        `https://api-car-rental.binaracademy.org/admin/v2/car?name=${name}&category=${category}&page=&pageSize=100`,
         config
       );
-      console.log(res.data.cars);
-      return res.data;
+      console.log(res.data);
+      return res.data
     } catch (error) {
       console.log(error);
       return error.response.data;
@@ -26,6 +26,7 @@ export const getCarList = createAsyncThunk(
 
 const initialState = {
   cars: [],
+//   page: [],
   name: "",
   category: "",
   loading: false,
@@ -38,7 +39,8 @@ const carListSlice = createSlice({
   reducers: {
     setFilter: (state, action) => {
       state.name = action.payload.name;
-      state.category = action.payload.name;
+      state.category = action.payload.category;
+    //   state.page = action.payload
     },
   },
   extraReducers: (builder) => {
