@@ -8,7 +8,7 @@ const SubSidebarDashboard = () => {
           <p>DASHBOARD</p>
         </div>
         <div className="list-sidebar">
-          <a onClick={() => navigate("dashboard")}>DASHBOARD</a>
+          <a onClick={() => navigate("dashboard")}>Dashboard</a>
         </div>
       </div>
     </>

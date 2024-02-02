@@ -8,6 +8,7 @@ import ProtectedLogin from "../hoc/ProtectedLogin";
 import ProtectedRoute from "../hoc/ProtectedRoute";
 import HomePage from "../pages/HomePage";
 import DeleteCar from "../components/DeleteCar";
+import PageNotFound from "../pages/PageNotFound";
 
 const routers = createBrowserRouter([
   {
@@ -52,14 +53,6 @@ const routers = createBrowserRouter([
       },
     ],
   },
-  // {
-  //   path: "/addCar",
-  //   element: (
-  //     <ProtectedRoute>
-  //       <AddCar />
-  //     </ProtectedRoute>
-  //   ),
-  // },
   {
     path: "/login",
     element: (
@@ -79,6 +72,10 @@ const routers = createBrowserRouter([
   {
     path: "/deletecar",
     element: <DeleteCar />,
+  },
+  {
+    path: "*",
+    element: <PageNotFound />,
   },
 ]);
 
