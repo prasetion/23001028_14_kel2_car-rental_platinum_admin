@@ -19,6 +19,7 @@ export const editCar = createAsyncThunk("editCar", async ({id, cars}) => {
 })
 
 const initialState = {
+    car: [],
     success: "",
     loading: false,
     error: null,

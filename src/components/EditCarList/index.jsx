@@ -14,7 +14,7 @@ import { getCarId } from "../../redux/features/getCarId/getCarIdSlice";
 const EditCarList = () => {
 
     const dispatch = useDispatch()
-    const {success: getCarIdSuccess, loading: getCarIdLoading, error: getCarIdError} = useSelector ((state) => state.getCarId)
+    const {carById, success: getCarIdSuccess, loading: getCarIdLoading, error: getCarIdError} = useSelector ((state) => state.getCarId)
     const {success, loading, error} = useSelector ((state) => state.editCar)
     const {id} = useParams()
     const [cars, setCars] = useState({
@@ -30,7 +30,7 @@ const EditCarList = () => {
     }, [])
 
     const getCars = async (idCar) => {
-        dispatch(getCarId({idCar, cars}))
+        dispatch(getCarId({idCar}))
     }
 
     
@@ -38,7 +38,7 @@ const EditCarList = () => {
         const {name, value} = e.target
         console.log(name, value)
         setCars({
-            ...cars,
+            ...carById,
             [name]: value,
         })
     }
@@ -71,7 +71,7 @@ const EditCarList = () => {
                         </div>
                         <div className="addcar-input-form-1">
                             <p>Harga<span className="asterisk">*</span></p>
-                            <input type="text" onChange={handleChange} name="price" value={cars.price} />
+                            <input type="number" onChange={handleChange} name="price" value={cars.price} />
                         </div>
                         <div className="addcar-input-form-1">
                             <p>Foto<span className="asterisk">*</span></p>

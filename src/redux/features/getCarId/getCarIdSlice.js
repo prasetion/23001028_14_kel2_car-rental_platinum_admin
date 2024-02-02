@@ -20,6 +20,7 @@ export const getCarId = createAsyncThunk("getCarId", async ({idCar, cars}) => {
 })
 
 const initialState = {
+    carById: {},
     success: "",
     loading: false,
     error: null,
