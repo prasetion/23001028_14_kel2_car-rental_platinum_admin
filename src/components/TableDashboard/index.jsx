@@ -80,7 +80,7 @@ const TableDashboard = () => {
 
   return (
     <div className="ms-4 mt-2">
-      <Table dataSource={dataSource} columns={columns} />;
+      <Table dataSource={dataSource} columns={columns} />
     </div>
   );
 };
