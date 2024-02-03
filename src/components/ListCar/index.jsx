@@ -9,16 +9,20 @@ import { getCarList, setFilter } from "../../redux/features/listcar/carListSlice
 import dayjs from "dayjs";
 import personIcon from "../../assets/fi_users.svg";
 import timeIcon from "../../assets/fi_clock.svg";
+import { Pagination } from "antd";
+import { createCar } from "../../redux/features/createCar/createCarSlice";
 
 const ListCar = () => {
   const dispatch = useDispatch();
-  const { cars, name, category, loading: carListLoading, error: carListError } = useSelector((state) => state.carList);
-  const { id, loading: deleteCarLoading, error: deleteCarError } = useSelector((state) => state.deleteCar);
+  const { page, cars, name, category, loading: carListLoading, error: carListError } = useSelector((state) => state.carList);
+  const { id: deleteCarId, loading: deleteCarLoading, error: deleteCarError } = useSelector((state) => state.deleteCar);
+  const {status, id, loading, error} = useSelector ((state) => state.createCar)
 
   const [activeButton, setActiveButton] = useState(1);
   const [confirmation, setConfirmation] = useState(false);
   const [selectedCar, setSelectedCar] = useState(null);
   const [successModal, setSuccessModal] = useState(false);
+  const [addCarModal, setAddCarModal] = useState(false)
 
   const carCategory = {
     small: "2 - 4 people",
@@ -27,13 +31,7 @@ const ListCar = () => {
   };
 
   useEffect(() => {
-    dispatch(getCarList({ name, category }));
-    setActiveButton(1);
-  }, []);
-  useEffect(() => {
-    // modal berhasil create car state success dipanggil di sini
-    // search button
-    dispatch(getCarList({ name, category }));
+    dispatch(getCarList({ name, category, page }));
     setActiveButton(1);
   }, []);
 
@@ -41,9 +39,9 @@ const ListCar = () => {
     setActiveButton((prevActiveButton) => (prevActiveButton === categoryButton ? null : categoryButton));
   };
 
-  const handleChangeFilter = (changeName, changeCategory) => {
-    dispatch(setFilter({ name: changeName, category: changeCategory }));
-    dispatch(getCarList({ name: changeName, category: changeCategory }));
+  const handleChangeFilter = (changeName, changeCategory, changePage ) => {
+    dispatch(setFilter({ name: changeName, category: changeCategory, page: changePage }));
+    dispatch(getCarList({ name: changeName, category: changeCategory, page: changePage }));
   };
 
   const toggleConfirmation = (carId) => {
@@ -51,19 +49,35 @@ const ListCar = () => {
     setSelectedCar(carId);
   };
 
+  const handlePageChange = (pageNumber) => {
+    dispatch(getCarList({ name, category, page: pageNumber }));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleDelete = async (id) => {
     try {
       await dispatch(deleteCar({ id }));
-      await dispatch(getCarList({ name, category }));
+      await dispatch(getCarList({ name, category, page }));
       await setConfirmation(!confirmation);
       await setSuccessModal(true);
       setTimeout(() => {
         setSuccessModal(false);
       }, 2000);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handleAddCarModal = async () => {
+    dispatch(createCar({status}))
+    if (status.statusText === "Created") {
+      await setAddCarModal(true)
+    }
+    setTimeout(() => {
+      setAddCarModal(false);
+    }, 2000);
+  }
 
   return (
     <div className="listcar-container">
@@ -71,6 +85,13 @@ const ListCar = () => {
         <div className="success-modal-container">
           <div className="success-modal">
             <p>Data Berhasil Dihapus</p>
+          </div>
+        </div>
+      )}
+      {addCarModal && (
+        <div className="success-modal-container">
+          <div className="success-modal">
+            <p>Data Berhasil Disimpan</p>
           </div>
         </div>
       )}
@@ -182,6 +203,9 @@ const ListCar = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="pagination-container">
+      {/* <Pagination current={page.page} total={page.count} onChange={handlePageChange} /> */}
       </div>
     </div>
   );

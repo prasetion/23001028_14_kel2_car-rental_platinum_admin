@@ -12,8 +12,8 @@ export const createCar = createAsyncThunk("createCar", async ({ form }) => {
           };
 
           const res = await axios.post("https://api-car-rental.binaracademy.org/admin/car", form, config)
-          console.log(res.data)
-          return res.data
+          console.log(res)
+          return res
     } catch (err) {
         console.log(err)
     }
@@ -22,6 +22,7 @@ export const createCar = createAsyncThunk("createCar", async ({ form }) => {
 
 const initialState = {
     id: "",
+    status: [],
     loading: false,
     error: null,
 }
@@ -37,7 +38,8 @@ const createCarSlice = createSlice({
         })
         .addCase(createCar.fulfilled, (state, action) => {
             state.loading = false
-            state.create = action.payload
+            state.createCar = action.payload.data
+            state.status = action.payload
         })
         .addCase(createCar.rejected, (state, action) => {
             state.loading = false
