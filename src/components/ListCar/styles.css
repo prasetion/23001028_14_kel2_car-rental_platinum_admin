@@ -311,3 +311,7 @@ button:target {
   font-weight: 700;
   line-height: 20px; /* 142.857% */
 }
+
+.pagination-container {
+  padding-top: 25px;
+}

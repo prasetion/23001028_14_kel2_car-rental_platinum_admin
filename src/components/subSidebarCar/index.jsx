@@ -5,7 +5,7 @@ const SubSidebarCar = () => {
     <>
       <div className={`sidebar-second-car`}>
         <div className="title-list-sidebar">
-          <p>Cars</p>
+          <p>CARS</p>
         </div>
         <div className="list-sidebar">
           <a onClick={() => navigate("carlist")}>List Car</a>

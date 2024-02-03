@@ -9,12 +9,13 @@ import downIcon from "../../assets/fi-chevron-down.svg"
 import { useDispatch, useSelector } from "react-redux";
 import { editCar } from "../../redux/features/editCar/editCarSlice";
 import { getCarId } from "../../redux/features/getCarId/getCarIdSlice";
+import { setCars } from "../../redux/features/editCar/editCarSlice";
 
 
 const EditCarList = () => {
 
     const dispatch = useDispatch()
-    const {success: getCarIdSuccess, loading: getCarIdLoading, error: getCarIdError} = useSelector ((state) => state.getCarId)
+    const {carById, success: getCarIdSuccess, loading: getCarIdLoading, error: getCarIdError} = useSelector ((state) => state.getCarId)
     const {success, loading, error} = useSelector ((state) => state.editCar)
     const {id} = useParams()
     const [cars, setCars] = useState({
@@ -30,22 +31,21 @@ const EditCarList = () => {
     }, [])
 
     const getCars = async (idCar) => {
-        dispatch(getCarId({idCar, cars}))
+        dispatch(getCarId({idCar}))
     }
 
     
     const handleChange = (e) => {
         const {name, value} = e.target
         console.log(name, value)
-        setCars({
+        dispatch(setCars({
             ...cars,
             [name]: value,
-        })
+        }))
     }
 
-    const handleSubmit = async (cars) => {
-        // e.preventDefault()
-        cars.price = Number(cars.price)
+    const handleSubmit = async () => {
+        // cars.price = Number(cars.price)
         dispatch(editCar({id, cars}))
 
     }
@@ -71,7 +71,7 @@ const EditCarList = () => {
                         </div>
                         <div className="addcar-input-form-1">
                             <p>Harga<span className="asterisk">*</span></p>
-                            <input type="text" onChange={handleChange} name="price" value={cars.price} />
+                            <input type="number" onChange={handleChange} name="price" value={cars.price} />
                         </div>
                         <div className="addcar-input-form-1">
                             <p>Foto<span className="asterisk">*</span></p>

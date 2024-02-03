@@ -34,12 +34,17 @@ const CreateNewCar = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        const maxSize = 2 * 1024 * 1024;
         if (!form.name || !form.price || !form.image || !form.category) {
             alert("Data harus diisi");
-            return;
+        } else if (form.image && form.image.size > maxSize)  {
+            alert("Ukuran file melebihi batas maksimum (2MB). Pilih file lain.")
+            e.target.value = null;
+        } else {
+            dispatch(createCar({form}))
+            navigate("/carlist")
         }
-        dispatch(createCar({form}))
-        // navigate("/carlist")
+
 
     }
 
@@ -71,12 +76,12 @@ const CreateNewCar = () => {
                     </div>
                     <div className="addcar-input-form-1">
                         <p>Harga<span className="asterisk">*</span></p>
-                        <input onChange={handleChange} name="price" type="text" />
+                        <input onChange={handleChange} name="price" type="number" />
                     </div>
                     <div className="addcar-input-form-1">
                         <p>Foto<span className="asterisk">*</span></p>
                         <div>
-                            <input onChange={handleChange} name="image" type="file" id="input-with-upload-image" />
+                            <input onChange={handleChange} name="image" type="file" accept=".jpg, .jpeg, .png" id="input-with-upload-image" />
                             <label htmlFor="input-with-upload-image" className="input-style">Pilih gambar<span><img src={uploadIcon} alt="" /></span></label>
                             <p id="requirement-text-image">File size max. 2MB</p>
                         </div>

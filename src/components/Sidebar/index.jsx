@@ -123,7 +123,7 @@ const Sidebar = () => {
             </div>
           </div>
           <div className="d-flex">
-            <div className={`sidebar-second`} style={{ borderRight: "1px solid #CFD4ED", marginRight: "20px" }}>
+            <div className={`sidebar-second`} style={{ marginRight: "20px" }}>
               {renderSubSidebar()}
             </div>
             <div className="main-content">{<Outlet />}</div>
