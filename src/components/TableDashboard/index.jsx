@@ -45,36 +45,47 @@ const TableDashboard = () => {
       title: "No",
       dataIndex: "No",
       key: "No",
+      sorter: (a, b) => a.No - b.No,
     },
     {
       title: "User Email",
       dataIndex: "UserEmail",
       key: "User Email",
+      sorter: (a, b) => a.UserEmail.localeCompare(b.UserEmail),
     },
     {
       title: "Car",
       dataIndex: "Car",
       key: "Car",
+      sorter: (a, b) => a.Car.localeCompare(b.Car),
     },
     {
       title: "Start Rent",
       dataIndex: "StartRent",
       key: "Start Rent",
+      sorter: (a, b) => dayjs(a.StartRent).valueOf() - dayjs(b.StartRent).valueOf(),
     },
     {
       title: "Finish Rent",
       dataIndex: "FinishRent",
       key: "Finish Rent",
+      sorter: (a, b) => dayjs(a.FinishRent).valueOf() - dayjs(b.FinishRent).valueOf(),
     },
     {
       title: "Price",
       dataIndex: "Price",
       key: "Price",
+      sorter: (a, b) => {
+        const priceA = parseFloat(a.Price.replace(/[^\d.]/g, ""));
+        const priceB = parseFloat(b.Price.replace(/[^\d.]/g, ""));
+        return priceA - priceB;
+      },
     },
     {
       title: "Category",
       dataIndex: "Category",
       key: "Category",
+      sorter: (a, b) => a.Category.localeCompare(b.Category),
     },
   ];
 
