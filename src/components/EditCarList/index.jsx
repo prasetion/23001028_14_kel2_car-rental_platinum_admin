@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { editCar } from "../../redux/features/editCar/editCarSlice";
 import { getCarId } from "../../redux/features/getCarId/getCarIdSlice";
 import { setCars } from "../../redux/features/editCar/editCarSlice";
+import dayjs from "dayjs";
 
 
 const EditCarList = () => {
@@ -85,7 +86,6 @@ const EditCarList = () => {
                         <div className="addcar-input-form-1">
                             <p>Kategori<span className="asterisk">*</span></p>
                             <select id="select-cars" onChange={handleChange} name="category" value={carId.category}>
-                                {/* <option value="">Kategori</option> */}
                                 <option className="category-option" value="small">2 - 4 people <span><img src={downIcon}/></span></option>
                                 <option value="medium">4 - 6 people</option>
                                 <option value="large">6 - 8 people</option>
@@ -93,11 +93,11 @@ const EditCarList = () => {
                         </div>
                         <div className="addcar-input-form-2">
                             <p>Created at</p>
-                            <p>-</p>
+                            <p>{dayjs(carId.createdAt).format("D MMM YYYY, HH:mm")}</p>
                         </div>
                         <div className="addcar-input-form-2">
                             <p>Update at</p>
-                            <p>-</p>
+                            <p>{dayjs(carId.updateAt).format("D MMM YYYY, HH:mm")}</p>
                         </div>
                     </div>
                 </div>

@@ -27,7 +27,7 @@ export const getCarList = createAsyncThunk(
 const initialState = {
     cars: [],
     page: "",
-    count: "",
+    count: [],
     name: "",
     category: "",
     loading: false,
@@ -42,7 +42,7 @@ const carListSlice = createSlice({
             state.name = action.payload.name;
             state.category = action.payload.category;
             state.page = action.payload.page
-            state.count = action.payload.count
+            state.count = action.payload
         },
     },
     extraReducers: (builder) => {
@@ -52,7 +52,8 @@ const carListSlice = createSlice({
         builder.addCase(getCarList.fulfilled, (state, action) => {
             state.loading = false;
             state.cars = action.payload.cars;
-            // state.page = action.payload
+            state.page = action.payload.page
+            state.count = action.payload
         });
         builder.addCase(getCarList.rejected, (state, action) => {
             state.loading = false;
