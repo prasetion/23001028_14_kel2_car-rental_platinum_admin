@@ -98,6 +98,17 @@
     line-height: 18px; /* 150% */
 }
 
+.addcar-input-form-2 p {
+    margin-bottom: 0;
+    width: 147px;
+    color: var(--Neutral-04, #3C3C3C);
+    font-family: Arial;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px; /* 150% */
+}
+
 select {
     width: 315px;
     display: flex;

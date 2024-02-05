@@ -15,7 +15,7 @@ import carPlaceHolder from "../../assets/vehicule-placeholder.png"
 
 const ListCar = () => {
   const dispatch = useDispatch();
-  const { cars, name, category, page, loading: carListLoading, error: carListError } = useSelector((state) => state.carList) || {};
+  const { cars, name, category, page, count,  loading: carListLoading, error: carListError } = useSelector((state) => state.carList) || {};
   const { id: deleteCarId, loading: deleteCarLoading, error: deleteCarError } = useSelector((state) => state.deleteCar);
   const {success, id, loading, error} = useSelector ((state) => state.createCar)
 
@@ -34,14 +34,6 @@ const ListCar = () => {
   useEffect(() => {
     dispatch(getCarList({ name, category, page}));
     setActiveButton(1);
-    // handleAddCarModal();
-    // dispatch(createCar({status}))
-    // if (success && success.statusText === "Created") {
-    //   setAddCarModal(true)
-    // }
-    // setTimeout(() => {
-    //   setAddCarModal(false);
-    // }, 2000);
   }, []);
 
 
@@ -61,7 +53,7 @@ const ListCar = () => {
 
   const handlePageChange = (pageNumber) => {
     dispatch(getCarList({ name, category, page: pageNumber }));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   const handleDelete = async (id) => {
@@ -72,26 +64,12 @@ const ListCar = () => {
       await setSuccessModal(true);
       setTimeout(() => {
         setSuccessModal(false);
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
       }, 2000);
       await window.scrollTo({ top: 0, behavior: 'instant' });
-      window.location.reload();
     } catch (error) {
       console.log(error);
     }
   };
-
-  const handleAddCarModal = async () => {
-    // dispatch(createCar({success}))
-    // if (success === "Created") {
-    //   await setAddCarModal(true)
-    // }
-    // setTimeout(() => {
-    //   setAddCarModal(false);
-    // }, 2000);
-  }
 
   return (
     <div className="listcar-container">
@@ -99,13 +77,6 @@ const ListCar = () => {
         <div className="success-modal-container">
           <div className="success-modal">
             <p>Data Berhasil Dihapus</p>
-          </div>
-        </div>
-      )}
-      {addCarModal && (
-        <div className="success-modal-container">
-          <div className="success-modal">
-            <p>Data Berhasil Disimpan</p>
           </div>
         </div>
       )}
@@ -219,7 +190,7 @@ const ListCar = () => {
         ))}
       </div>
       <div className="pagination-container">
-      <Pagination current={page.page} total={page.count} onChange={handlePageChange} />
+      <Pagination current={count.page} total={count.count} onChange={handlePageChange} />
       </div>
     </div>
   );

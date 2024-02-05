@@ -96,14 +96,6 @@ const CreateNewCar = () => {
 
                         </select>
                     </div>
-                    <div className="addcar-input-form-2">
-                        <p>Created at</p>
-                        <p>-</p>
-                    </div>
-                    <div className="addcar-input-form-2">
-                        <p>Update at</p>
-                        <p>-</p>
-                    </div>
                 </div>
             </div>
             <div className="button-container">
