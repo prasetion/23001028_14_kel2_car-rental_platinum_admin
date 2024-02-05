@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const getCarList = createAsyncThunk(
     "carList/getCarList",
-    async({ name, category }) => {
+    async({ name, category, page }) => {
         try {
             const token = localStorage.getItem("access_token");
             const config = {
@@ -12,7 +12,7 @@ export const getCarList = createAsyncThunk(
                 },
             };
             const res = await axios.get(
-                `https://api-car-rental.binaracademy.org/admin/v2/car?name=${name}&category=${category}&page=&pageSize=100`,
+                `https://api-car-rental.binaracademy.org/admin/v2/car?name=${name}&category=${category}&page=${page}&pageSize=10`,
                 config
             );
             console.log(res.data);
@@ -26,7 +26,8 @@ export const getCarList = createAsyncThunk(
 
 const initialState = {
     cars: [],
-    //   page: [],
+    page: "",
+    count: "",
     name: "",
     category: "",
     loading: false,
@@ -40,7 +41,8 @@ const carListSlice = createSlice({
         setFilter: (state, action) => {
             state.name = action.payload.name;
             state.category = action.payload.category;
-            //   state.page = action.payload
+            state.page = action.payload.page
+            state.count = action.payload.count
         },
     },
     extraReducers: (builder) => {
@@ -50,6 +52,7 @@ const carListSlice = createSlice({
         builder.addCase(getCarList.fulfilled, (state, action) => {
             state.loading = false;
             state.cars = action.payload.cars;
+            // state.page = action.payload
         });
         builder.addCase(getCarList.rejected, (state, action) => {
             state.loading = false;

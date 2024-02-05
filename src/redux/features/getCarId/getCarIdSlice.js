@@ -14,13 +14,14 @@ export const getCarId = createAsyncThunk("getCarId", async ({idCar}) => {
         const res = await axios.get(`https://api-car-rental.binaracademy.org/admin/car/${idCar}`, config)
         // setCars(res.data)
         console.log(res.data)
+        return res.data
     } catch (err) {
         console.log(err)
     }
 })
 
 const initialState = {
-    carById: {},
+    carId: {},
     success: "",
     loading: false,
     error: null,
@@ -37,7 +38,7 @@ const getCarIdSlice = createSlice({
         })
         .addCase(getCarId.fulfilled, (state, action) => {
             state.loading = false
-            state.getCarId = action.payload
+            state.carId = action.payload
         })
         .addCase(getCarId.rejected, (state, action) => {
             state.loading = false
