@@ -20,6 +20,7 @@ export const editCar = createAsyncThunk("editCar", async ({id, cars}) => {
 })
 
 const initialState = {
+    carById: [],
     success: "",
     loading: false,
     error: null,
@@ -46,6 +47,7 @@ const editCarSlice = createSlice({
         .addCase(editCar.fulfilled, (state, action) => {
             state.loading = false
             state.editCar = action.payload
+            state.carById = action.payload
         })
         .addCase(editCar.rejected, (state, action) => {
             state.loading = false

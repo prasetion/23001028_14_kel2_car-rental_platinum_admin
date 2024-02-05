@@ -22,7 +22,7 @@ export const createCar = createAsyncThunk("createCar", async ({ form }) => {
 
 const initialState = {
     id: "",
-    status: [],
+    success: "",
     loading: false,
     error: null,
 }
@@ -39,7 +39,7 @@ const createCarSlice = createSlice({
         .addCase(createCar.fulfilled, (state, action) => {
             state.loading = false
             state.createCar = action.payload.data
-            state.status = action.payload
+            state.success = action.payload.statusText
         })
         .addCase(createCar.rejected, (state, action) => {
             state.loading = false

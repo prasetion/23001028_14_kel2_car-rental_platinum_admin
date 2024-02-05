@@ -15,16 +15,16 @@ import { setCars } from "../../redux/features/editCar/editCarSlice";
 const EditCarList = () => {
 
     const dispatch = useDispatch()
-    const {carById, success: getCarIdSuccess, loading: getCarIdLoading, error: getCarIdError} = useSelector ((state) => state.getCarId)
+    const {carId, success: getCarIdSuccess, loading: getCarIdLoading, error: getCarIdError} = useSelector ((state) => state.getCarId)
     const {success, loading, error} = useSelector ((state) => state.editCar)
     const {id} = useParams()
-    const [cars, setCars] = useState({
-        name: "",
-        category: "",
-        price: "",
-        status: "",
-        image: ""
-    })
+    // const [cars, setCars] = useState({
+    //     name: "",
+    //     category: "",
+    //     price: "",
+    //     status: "",
+    //     image: ""
+    // })
 
     useEffect(() => {
         getCars(id)
@@ -34,12 +34,13 @@ const EditCarList = () => {
         dispatch(getCarId({idCar}))
     }
 
+    console.log("carById:", carId);
     
     const handleChange = (e) => {
         const {name, value} = e.target
         console.log(name, value)
         dispatch(setCars({
-            ...cars,
+            ...carId,
             [name]: value,
         }))
     }
@@ -67,23 +68,23 @@ const EditCarList = () => {
                     <div className="addcar-input-form">
                         <div className="addcar-input-form-1">
                             <p>Nama<span className="asterisk">*</span></p>
-                            <input className="input-style" type="text" onChange={handleChange} name="name" value={cars.name}/>
+                            <input className="input-style" type="text" onChange={handleChange} name="name" value={carId.name}/>
                         </div>
                         <div className="addcar-input-form-1">
                             <p>Harga<span className="asterisk">*</span></p>
-                            <input type="number" onChange={handleChange} name="price" value={cars.price} />
+                            <input type="number" onChange={handleChange} name="price" value={carId.price} />
                         </div>
                         <div className="addcar-input-form-1">
                             <p>Foto<span className="asterisk">*</span></p>
                             <div>
-                                <input type="file" id="input-with-upload-image" onChange={handleChange} name="image" placeholder={cars.image} />
+                                <input type="file" id="input-with-upload-image" onChange={handleChange} name="image" placeholder={carId.image} />
                                 <label for="input-with-upload-image" className="input-style">Pilih gambar<span><img src={uploadIcon} alt="" /></span></label>
                                 <p id="requirement-text-image">File size max. 2MB</p>
                             </div>
                         </div>
                         <div className="addcar-input-form-1">
                             <p>Kategori<span className="asterisk">*</span></p>
-                            <select id="select-cars" onChange={handleChange} name="category" value={cars.category}>
+                            <select id="select-cars" onChange={handleChange} name="category" value={carId.category}>
                                 {/* <option value="">Kategori</option> */}
                                 <option className="category-option" value="small">2 - 4 people <span><img src={downIcon}/></span></option>
                                 <option value="medium">4 - 6 people</option>

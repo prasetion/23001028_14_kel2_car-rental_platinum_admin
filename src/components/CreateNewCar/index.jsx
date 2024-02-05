@@ -11,7 +11,7 @@ import { createCar } from "../../redux/features/createCar/createCarSlice";
 
 const CreateNewCar = () => {
     const dispatch = useDispatch()
-    const {id, loading, error} = useSelector ((state) => state.createCar)
+    const {id, loading, error, status} = useSelector ((state) => state.createCar)
 
     const navigate = useNavigate();
 

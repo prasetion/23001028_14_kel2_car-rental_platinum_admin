@@ -11,12 +11,13 @@ import personIcon from "../../assets/fi_users.svg";
 import timeIcon from "../../assets/fi_clock.svg";
 import { Pagination } from "antd";
 import { createCar } from "../../redux/features/createCar/createCarSlice";
+import carPlaceHolder from "../../assets/vehicule-placeholder.png"
 
 const ListCar = () => {
   const dispatch = useDispatch();
-  const { page, cars, name, category, loading: carListLoading, error: carListError } = useSelector((state) => state.carList);
+  const { cars, name, category, page, loading: carListLoading, error: carListError } = useSelector((state) => state.carList) || {};
   const { id: deleteCarId, loading: deleteCarLoading, error: deleteCarError } = useSelector((state) => state.deleteCar);
-  const {status, id, loading, error} = useSelector ((state) => state.createCar)
+  const {success, id, loading, error} = useSelector ((state) => state.createCar)
 
   const [activeButton, setActiveButton] = useState(1);
   const [confirmation, setConfirmation] = useState(false);
@@ -31,9 +32,18 @@ const ListCar = () => {
   };
 
   useEffect(() => {
-    dispatch(getCarList({ name, category, page }));
+    dispatch(getCarList({ name, category, page}));
     setActiveButton(1);
+    // handleAddCarModal();
+    // dispatch(createCar({status}))
+    // if (success && success.statusText === "Created") {
+    //   setAddCarModal(true)
+    // }
+    // setTimeout(() => {
+    //   setAddCarModal(false);
+    // }, 2000);
   }, []);
+
 
   const handleButtonClick = (categoryButton) => {
     setActiveButton((prevActiveButton) => (prevActiveButton === categoryButton ? null : categoryButton));
@@ -57,26 +67,30 @@ const ListCar = () => {
   const handleDelete = async (id) => {
     try {
       await dispatch(deleteCar({ id }));
-      await dispatch(getCarList({ name, category, page }));
+      await dispatch(getCarList({ name, category, page}));
       await setConfirmation(!confirmation);
       await setSuccessModal(true);
       setTimeout(() => {
         setSuccessModal(false);
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       }, 2000);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      await window.scrollTo({ top: 0, behavior: 'instant' });
+      window.location.reload();
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleAddCarModal = async () => {
-    dispatch(createCar({status}))
-    if (status.statusText === "Created") {
-      await setAddCarModal(true)
-    }
-    setTimeout(() => {
-      setAddCarModal(false);
-    }, 2000);
+    // dispatch(createCar({success}))
+    // if (success === "Created") {
+    //   await setAddCarModal(true)
+    // }
+    // setTimeout(() => {
+    //   setAddCarModal(false);
+    // }, 2000);
   }
 
   return (
@@ -133,7 +147,7 @@ const ListCar = () => {
           className={activeButton === 1 ? "active" : "categoryButton"}
           disabled={activeButton === 1}
           onClick={() => {
-            handleChangeFilter("", ""), handleButtonClick(1);
+            handleChangeFilter("", "", ""), handleButtonClick(1);
           }}
         >
           All
@@ -143,7 +157,7 @@ const ListCar = () => {
           className={activeButton === 2 ? "active" : "categoryButton"}
           disabled={activeButton === 2}
           onClick={() => {
-            handleChangeFilter("", "small"), handleButtonClick(2);
+            handleChangeFilter("", "small", ""), handleButtonClick(2);
           }}
         >
           2 - 4 people
@@ -153,7 +167,7 @@ const ListCar = () => {
           className={activeButton === 3 ? "active" : "categoryButton"}
           disabled={activeButton === 3}
           onClick={() => {
-            handleChangeFilter("", "medium"), handleButtonClick(3);
+            handleChangeFilter("", "medium", ""), handleButtonClick(3);
           }}
         >
           4 - 6 people
@@ -163,17 +177,17 @@ const ListCar = () => {
           className={activeButton === 4 ? "active" : "categoryButton"}
           disabled={activeButton === 4}
           onClick={() => {
-            handleChangeFilter("", "large"), handleButtonClick(4);
+            handleChangeFilter("", "large", ""), handleButtonClick(4);
           }}
         >
           6 - 8 people
         </button>
       </div>
       <div className="carlist-item">
-        {cars.map((car) => (
+        {cars && cars.map((car) => (
           <div key={car.id} id="carlist-card">
             <div className="carimage-card">
-              <img src={car.image} alt="" />
+              <img src={car.image === null ? carPlaceHolder : car.image} alt="" />
             </div>
             <div>
               <p id="carlist-typecar">{car.name}</p>
@@ -205,7 +219,7 @@ const ListCar = () => {
         ))}
       </div>
       <div className="pagination-container">
-      {/* <Pagination current={page.page} total={page.count} onChange={handlePageChange} /> */}
+      <Pagination current={page.page} total={page.count} onChange={handlePageChange} />
       </div>
     </div>
   );
